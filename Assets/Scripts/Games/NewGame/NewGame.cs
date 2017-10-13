@@ -5,14 +5,11 @@ using System.Collections.Generic;
 
 
 /// <summary>
-/// In this game, React, we want to display a stimulus (rectangle) for a defined duration.
-/// During that duration, the player needs to respond as quickly as possible.
-/// Each Trial also has a defined delay to keep the player from guessing.
-/// Some appropriate visual feedback is also displayed according to the player's response.
+/// In this game, 
 /// </summary>
 public class NewGame : GameBase
 {
-	const string INSTRUCTIONS = "Press <color=cyan>Spacebar</color> as soon as you see the square.";
+	//const string INSTRUCTIONS = "Press <color=cyan>Spacebar</color> as soon as you see the square.";
 	const string FINISHED = "FINISHED!";
 	const string RESPONSE_GUESS = "No Guessing!";
 	const string RESPONSE_CORRECT = "Good!";
@@ -46,7 +43,7 @@ public class NewGame : GameBase
 	{
 		base.StartSession(sessionFile);
 
-		instructionsText.text = INSTRUCTIONS;
+		//instructionsText.text = INSTRUCTIONS;
 		StartCoroutine(RunTrials(SessionData));
 
 		return this;
@@ -83,7 +80,7 @@ public class NewGame : GameBase
 		StartInput();
 		stim.SetActive(true);
 
-		yield return new WaitForSeconds(((ReactTrial)t).duration);
+		yield return new WaitForSeconds(((NewGameTrial)t).duration);
 		stim.SetActive(false);
 		EndInput();
 
@@ -181,12 +178,12 @@ public class NewGame : GameBase
 	/// </summary>
 	protected float GetAccuracy(Trial t, float time)
 	{
-		ReactData data = sessionData.gameData as ReactData;
+		NewGameData data = sessionData.gameData as NewGameData;
 		bool hasResponseTimeLimit =  data.ResponseTimeLimit > 0;
 
 		float rTime = time - data.GuessTimeLimit;
 		float totalTimeWindow = hasResponseTimeLimit ? 
-			data.ResponseTimeLimit : (t as ReactTrial).duration;
+			data.ResponseTimeLimit : (t as NewGameTrial).duration;
 
 		return 1f - (rTime / (totalTimeWindow - data.GuessTimeLimit));
 	}
@@ -197,7 +194,7 @@ public class NewGame : GameBase
 	/// </summary>
 	protected bool IsGuessResponse(float time)
 	{
-		ReactData data = sessionData.gameData as ReactData;
+        NewGameData data = sessionData.gameData as NewGameData;
 		return data.GuessTimeLimit > 0 && time < data.GuessTimeLimit;
 	}
 
@@ -207,7 +204,7 @@ public class NewGame : GameBase
 	/// </summary>
 	protected bool IsValidResponse(float time)
 	{
-		ReactData data = sessionData.gameData as ReactData;
+		NewGameData data = sessionData.gameData as NewGameData;
 		return data.ResponseTimeLimit <= 0 || time < data.ResponseTimeLimit;
 	}
 }

@@ -6,7 +6,7 @@ using System.Xml.Linq;
 
 
 /// <summary>
-/// Contains Trial data for the React gameType.
+/// Contains Trial data for the NewGame gameType.
 /// </summary>
 public class NewGameTrial : Trial
 {
@@ -58,6 +58,6 @@ public class NewGameTrial : Trial
 	public override void WriteOutputData(ref XElement elem)
 	{
 		base.WriteOutputData(ref elem);
-		XMLUtil.CreateAttribute(ReactData.ATTRIBUTE_DURATION, duration.ToString(), ref elem);
+		XMLUtil.CreateAttribute(NewGameData.ATTRIBUTE_DURATION, duration.ToString(), ref elem);
 	}
 }

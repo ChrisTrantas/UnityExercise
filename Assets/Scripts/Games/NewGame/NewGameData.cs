@@ -6,7 +6,7 @@ using System.Xml.Linq;
 
 
 /// <summary>
-/// Contains general Game data for the React gametype.
+/// Contains general Game data for the NewGame gametype.
 /// </summary>
 public class NewGameData : GameData
 {
