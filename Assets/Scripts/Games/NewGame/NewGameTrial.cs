@@ -44,8 +44,8 @@ public class NewGameTrial : Trial
 	{
 		base.ParseGameSpecificVars(n, session);
 
-		ReactData data = (ReactData)(session.gameData);
-		if (!XMLUtil.ParseAttribute(n, ReactData.ATTRIBUTE_DURATION, ref duration, true))
+		NewGameData data = (NewGameData)(session.gameData);
+		if (!XMLUtil.ParseAttribute(n, NewGameData.ATTRIBUTE_DURATION, ref duration, true))
 		{
 			duration = data.GeneratedDuration;
 		}
