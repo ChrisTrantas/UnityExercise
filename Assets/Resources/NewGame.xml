@@ -5,9 +5,9 @@
     <newgame duration="1" guessTimeLimit="0.125" responseTimeLimit =".8" />
   </settings>
   <trials>
-    <trial delay="0.2" />
-    <trial delay="0.3" />
-    <trial delay="0.3" />
+    <trial delay="0.2" posX="0" posY="0" isRed = "false" />
+    <trial delay="0.3" posX="0" posY="0" isRed = "false" />
+    <trial delay="0.3" posX="0" posY="0" isRed = "false" />
 
   </trials>
 </session>

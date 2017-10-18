@@ -6,6 +6,7 @@ using System.Xml.Linq;
 public class TrialResult
 {
 	const string ATTRIBUTE_SUCCESS = "success";
+    const string ATTRIBUTE_FAIL = "fail";
 	const string ATTRIBUTE_RESPONSE_TIME = "responseTime";
 	const string ATTRIBUTE_ACCURACY = "accuracy";
 
@@ -20,6 +21,7 @@ public class TrialResult
 	/// e.g. Returns True if a player did nothing during a trial that has isGo="False"
 	/// </summary>
 	public bool success = false;
+    public bool fail = false;
 	/// <summary>
 	/// Response time in seconds.
 	/// The context of this will vary according to the gametype.
@@ -59,6 +61,7 @@ public class TrialResult
 	public virtual void WriteOutputData(ref XElement elem)
 	{
 		XMLUtil.CreateAttribute(ATTRIBUTE_SUCCESS, success.ToString(), ref elem);
+        XMLUtil.CreateAttribute(ATTRIBUTE_FAIL, fail.ToString(), ref elem);
 		XMLUtil.CreateAttribute(ATTRIBUTE_RESPONSE_TIME, responseTime.ToString(), ref elem);
 		XMLUtil.CreateAttribute(ATTRIBUTE_ACCURACY, accuracy.ToString(), ref elem);
 	}

@@ -9,10 +9,11 @@ using System.Collections.Generic;
 /// </summary>
 public class NewGame : GameBase
 {
-	//const string INSTRUCTIONS = "Press <color=cyan>Spacebar</color> as soon as you see the square.";
+	const string INSTRUCTIONS = "Press <color=cyan>Spacebar</color> as soon as you see the GREEN square.";
 	const string FINISHED = "FINISHED!";
 	const string RESPONSE_GUESS = "No Guessing!";
-	const string RESPONSE_CORRECT = "Good!";
+    const string RESPONSE_INCORRECT = "Don't click red!";
+    const string RESPONSE_CORRECT = "Good!";
 	const string RESPONSE_TIMEOUT = "Missed it!";
 	const string RESPONSE_SLOW = "Too Slow!";
 	Color RESPONSE_COLOR_GOOD = Color.green;
@@ -74,7 +75,10 @@ public class NewGame : GameBase
 	{
 		GameObject stim = stimulus;
 		stim.SetActive(false);
-
+       //stim.gameObject.transform(t.positionX, t.positionY);
+       //stim.transform(t.positionX, t.positionY);
+       //stim.gameObject.GetComponent<RectTransform>.transform(t.positionX, t.positionY);
+       //stim.GetComponent<>.transform(t.positionX, t.positionY, 0);
 		yield return new WaitForSeconds(t.delay);
 
 		StartInput();
@@ -147,7 +151,15 @@ public class NewGame : GameBase
 				r.accuracy = GetAccuracy(t, time);
 				GUILog.Log("Success! responseTime = {0}", time);
 			}
-			else
+            else if (IsValidResponse(time))
+            {
+                // Responded correctly but wrong color
+                DisplayFeedback(RESPONSE_INCORRECT, RESPONSE_COLOR_BAD);
+                r.success = false;
+                r.accuracy = GetAccuracy(t, time);
+                GUILog.Log("Fail! responseTime = {0}", time);
+            }
+            else
 			{
 				// Responded too slow.
 				DisplayFeedback(RESPONSE_SLOW, RESPONSE_COLOR_BAD);
