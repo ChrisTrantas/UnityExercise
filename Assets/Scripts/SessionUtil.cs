@@ -39,7 +39,7 @@ public static class SessionUtil
 				return XMLUtil.ELEM_REACT;
 
             case GameType.NewGame:
-                return XMLUtil.ELEM_REACT;
+                return XMLUtil.ELEM_NEWGAME;
 
 			default:
 				return string.Empty;

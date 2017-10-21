@@ -9,7 +9,7 @@ using System.Collections.Generic;
 /// </summary>
 public class NewGame : GameBase
 {
-	const string INSTRUCTIONS = "Press <color=cyan>Spacebar</color> as soon as you see the GREEN square.";
+	const string INSTRUCTIONS = "Press <color=cyan>Spacebar</color> as soon as you see the <color=green>GREEN</color> square.";
 	const string FINISHED = "FINISHED!";
 	const string RESPONSE_GUESS = "No Guessing!";
     const string RESPONSE_INCORRECT = "Don't click red!";
@@ -19,10 +19,10 @@ public class NewGame : GameBase
 	Color RESPONSE_COLOR_GOOD = Color.green;
 	Color RESPONSE_COLOR_BAD = Color.red;
 
-	/// <summary>
-	/// A reference to the UI canvas so we can instantiate the feedback text.
-	/// </summary>
-	public GameObject uiCanvas;
+    /// <summary>
+    /// A reference to the UI canvas so we can instantiate the feedback text.
+    /// </summary>
+    public GameObject uiCanvas;
 	/// <summary>
 	/// The object that will be displayed briefly to the player.
 	/// </summary>
@@ -74,17 +74,23 @@ public class NewGame : GameBase
 	protected virtual IEnumerator DisplayStimulus(Trial t)
 	{
 		GameObject stim = stimulus;
-		stim.SetActive(false);
-       //stim.gameObject.transform(t.positionX, t.positionY);
-       //stim.transform(t.positionX, t.positionY);
-       //stim.gameObject.GetComponent<RectTransform>.transform(t.positionX, t.positionY);
-       //stim.GetComponent<>.transform(t.positionX, t.positionY, 0);
+        
+        stim.SetActive(false);
+        if (t.isRandom)
+        {
+            t.positionX = Random.Range(-225.0f, 225.0f);
+            t.positionY = Random.Range(-225.0f, 225.0f);
+            stim.transform.Translate(t.positionX, t.positionY, 0.0f);
+        }
+        else
+        {
+            stim.transform.Translate(t.positionX, t.positionY, 0.0f);
+        }
 		yield return new WaitForSeconds(t.delay);
 
 		StartInput();
 		stim.SetActive(true);
-
-		yield return new WaitForSeconds(((NewGameTrial)t).duration);
+        yield return new WaitForSeconds(((NewGameTrial)t).duration);
 		stim.SetActive(false);
 		EndInput();
 

@@ -18,6 +18,7 @@ public class Trial
     public const string ATTRIBUTE_POSX = "posX";
     public const string ATTRIBUTE_POSY = "posY";
     public const string ATTRIBUTE_IS_RED = "isRed";
+    public const string ATTRIBUTE_IS_RANDOM = "isRandom";
 
 	#endregion
 
@@ -29,6 +30,7 @@ public class Trial
     public float positionX;
     public float positionY;
     public bool isRed;
+    public bool isRandom;
 
 
 	public Trial(SessionData data, XmlElement n)
@@ -48,7 +50,8 @@ public class Trial
         XMLUtil.ParseAttribute(n, ATTRIBUTE_POSX, ref positionX);
         XMLUtil.ParseAttribute(n, ATTRIBUTE_POSY, ref positionY);
         XMLUtil.ParseAttribute(n, ATTRIBUTE_IS_RED, ref isRed);
-	}
+        XMLUtil.ParseAttribute(n, ATTRIBUTE_IS_RANDOM, ref isRandom);
+    }
 
 	
 	/// <summary>
@@ -60,5 +63,6 @@ public class Trial
         XMLUtil.CreateAttribute(ATTRIBUTE_POSX, positionX.ToString(), ref elem);
         XMLUtil.CreateAttribute(ATTRIBUTE_POSY, positionY.ToString(), ref elem);
         XMLUtil.CreateAttribute(ATTRIBUTE_IS_RED, isRed.ToString(), ref elem);
+        XMLUtil.CreateAttribute(ATTRIBUTE_IS_RANDOM, isRandom.ToString(), ref elem);
     }
 }
