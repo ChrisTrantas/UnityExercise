@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <session>
   <settings>
-    <general gameType="NewGame" shuffle="true" />
+    <general gameType="NewGame" shuffle="false" />
     <newgame duration="1" guessTimeLimit="0.125" responseTimeLimit =".8" />
   </settings>
   <trials>
-    <trial delay="0.2" posX="5.0" posY="0" isRed = "false" isRandom = "false"/>
-    <trial delay="0.3" posX="29.0" posY="100.0" isRed = "false" isRandom = "false"/>
-    <trial delay="0.3" posX="-100.0" posY="-100.0" isRed = "false" isRandom = "false"/>
-    <trial delay="0.3" posX="0.0" posY="0.0" isRed = "false" isRandom = "true"/>  
-    <trial delay="0.3" posX="0.0" posY="0.0" isRed = "false" isRandom = "true"/>
-    <trial delay="0.3" posX="0.0" posY="0.0" isRed = "false" isRandom = "true"/>
+    <trial delay="0.2" posX="5.0"    posY="0"      isRed = "true"  isRandom = "false"/>
+    <trial delay="0.3" posX="29.0"   posY="100.0"  isRed = "true"  isRandom = "false"/>
+    <trial delay="0.3" posX="-100.0" posY="-100.0" isRed = "true"  isRandom = "false"/>
+    <trial delay="0.3" posX="0.0"    posY="0.0"    isRed = "false"  isRandom = "true"/>  
+    <trial delay="0.3" posX="0.0"    posY="0.0"    isRed = "false"  isRandom = "true"/>
+    <trial delay="0.3" posX="0.0"    posY="0.0"    isRed = "false"  isRandom = "true"/>
   </trials>
 </session>

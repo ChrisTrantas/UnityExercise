@@ -80,11 +80,19 @@ public class NewGame : GameBase
         {
             t.positionX = Random.Range(-225.0f, 225.0f);
             t.positionY = Random.Range(-225.0f, 225.0f);
-            stim.transform.Translate(t.positionX, t.positionY, 0.0f);
+            stim.transform.Translate(t.positionX, t.positionY, 0.0f); 
         }
         else
         {
             stim.transform.Translate(t.positionX, t.positionY, 0.0f);
+        }
+        if (t.isRed)
+        {
+            stim.GetComponent<Image>().color = RESPONSE_COLOR_BAD;
+        }
+        else
+        {
+            stim.GetComponent<Image>().color = RESPONSE_COLOR_GOOD;
         }
 		yield return new WaitForSeconds(t.delay);
 
@@ -149,7 +157,7 @@ public class NewGame : GameBase
 				DisplayFeedback(RESPONSE_GUESS, RESPONSE_COLOR_BAD);
 				GUILog.Log("Fail! Guess response! responseTime = {0}", time);
 			}
-			else if (IsValidResponse(time))
+			else if (IsValidResponse(time) && !t.isRed)
 			{
 				// Responded correctly.
 				DisplayFeedback(RESPONSE_CORRECT, RESPONSE_COLOR_GOOD);
@@ -157,7 +165,7 @@ public class NewGame : GameBase
 				r.accuracy = GetAccuracy(t, time);
 				GUILog.Log("Success! responseTime = {0}", time);
 			}
-            else if (IsValidResponse(time))
+            else if (IsValidResponse(time) && t.isRed)
             {
                 // Responded correctly but wrong color
                 DisplayFeedback(RESPONSE_INCORRECT, RESPONSE_COLOR_BAD);
