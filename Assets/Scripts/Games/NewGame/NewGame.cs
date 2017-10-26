@@ -143,7 +143,14 @@ public class NewGame : GameBase
 	{
 		TrialResult r = new TrialResult(t);
 		r.responseTime = time;
-		if (time == 0)
+        if (time == 0 && t.isRed)
+        {
+            DisplayFeedback(RESPONSE_CORRECT, RESPONSE_COLOR_GOOD);
+            GUILog.Log("Success! Didn't click red! responseTime = {0}", time);
+            sessionData.results.Add(r);
+            return;
+        }
+        if (time == 0 && !t.isRed)
 		{
 			// No response.
 			DisplayFeedback(RESPONSE_TIMEOUT, RESPONSE_COLOR_BAD);
@@ -175,9 +182,17 @@ public class NewGame : GameBase
             }
             else
 			{
-				// Responded too slow.
-				DisplayFeedback(RESPONSE_SLOW, RESPONSE_COLOR_BAD);
-				GUILog.Log("Fail! Slow response! responseTime = {0}", time);
+                // Responded too slow.
+                if (t.isRed)
+                {
+                    DisplayFeedback(RESPONSE_CORRECT, RESPONSE_COLOR_GOOD);
+                    GUILog.Log("Success! Didn't click red! responseTime = {0}", time);
+                }
+                else
+                {
+                    DisplayFeedback(RESPONSE_SLOW, RESPONSE_COLOR_BAD);
+                    GUILog.Log("Fail! Slow response! responseTime = {0}", time);
+                }
 			}
 		}
 		sessionData.results.Add(r);
