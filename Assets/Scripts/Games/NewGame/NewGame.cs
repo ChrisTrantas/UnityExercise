@@ -10,6 +10,9 @@ using System.Collections.Generic;
 public class NewGame : GameBase
 {
 	const string INSTRUCTIONS = "Press <color=cyan>Spacebar</color> as soon as you see the <color=green>GREEN</color> square.";
+    /// <summary>
+    /// Casses and the proper responses
+    /// </summary>
 	const string FINISHED = "FINISHED!";
 	const string RESPONSE_GUESS = "No Guessing!";
     const string RESPONSE_INCORRECT = "Don't click red!";
@@ -76,6 +79,10 @@ public class NewGame : GameBase
 		GameObject stim = stimulus;
         
         stim.SetActive(false);
+        /// <summary>
+        /// If the trial isRandom then it will spawn in a random range between -225 - 225
+        /// else it would go by value marked on the trial entry
+        /// </summary>
         if (t.isRandom)
         {
             t.positionX = Random.Range(-225.0f, 225.0f);
@@ -86,6 +93,10 @@ public class NewGame : GameBase
         {
             stim.transform.Translate(t.positionX, t.positionY, 0.0f);
         }
+        ///<summary>
+        /// If the trial isRed then it will make the stimulus red
+        /// else it will be green and valid
+        ///</summary>
         if (t.isRed)
         {
             stim.GetComponent<Image>().color = RESPONSE_COLOR_BAD;
@@ -143,6 +154,8 @@ public class NewGame : GameBase
 	{
 		TrialResult r = new TrialResult(t);
 		r.responseTime = time;
+        // stim isRed and times out
+        // Result: Correct response
         if (time == 0 && t.isRed)
         {
             DisplayFeedback(RESPONSE_CORRECT, RESPONSE_COLOR_GOOD);
@@ -150,6 +163,8 @@ public class NewGame : GameBase
             sessionData.results.Add(r);
             return;
         }
+        // If not red and times out
+        // Result: Fail. No response
         if (time == 0 && !t.isRed)
 		{
 			// No response.
@@ -158,12 +173,15 @@ public class NewGame : GameBase
 		}
 		else
 		{
+            // Player Guesses
 			if (IsGuessResponse(time))
 			{
 				// Responded before the guess limit, aka guessed.
 				DisplayFeedback(RESPONSE_GUESS, RESPONSE_COLOR_BAD);
 				GUILog.Log("Fail! Guess response! responseTime = {0}", time);
 			}
+
+            // Player responds in time and it is not red
 			else if (IsValidResponse(time) && !t.isRed)
 			{
 				// Responded correctly.
@@ -172,6 +190,8 @@ public class NewGame : GameBase
 				r.accuracy = GetAccuracy(t, time);
 				GUILog.Log("Success! responseTime = {0}", time);
 			}
+
+            // player responds and it is red
             else if (IsValidResponse(time) && t.isRed)
             {
                 // Responded correctly but wrong color
@@ -180,14 +200,17 @@ public class NewGame : GameBase
                 r.accuracy = GetAccuracy(t, time);
                 GUILog.Log("Fail! responseTime = {0}", time);
             }
+            
+            // No responce
             else
 			{
-                // Responded too slow.
+                // Catch in case it is red and gets to here
                 if (t.isRed)
                 {
                     DisplayFeedback(RESPONSE_CORRECT, RESPONSE_COLOR_GOOD);
                     GUILog.Log("Success! Didn't click red! responseTime = {0}", time);
                 }
+                // No response and fail
                 else
                 {
                     DisplayFeedback(RESPONSE_SLOW, RESPONSE_COLOR_BAD);

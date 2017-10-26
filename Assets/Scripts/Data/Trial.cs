@@ -12,7 +12,9 @@ public class Trial
 {
 
 	#region ATTRIBUTES
-
+    /// <summary>
+    /// Attributes of the Trial
+    /// </summary>
 	public const string ATTRIBUTE_IS_GO = "isGo";
 	public const string ATTRIBUTE_DELAY = "delay";
     public const string ATTRIBUTE_POSX = "posX";

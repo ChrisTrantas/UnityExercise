@@ -14,7 +14,6 @@ public class SessionData
 	const string ATTRIBUTE_GAMETYPE = "gameType";
 	const string ATTRIBUTE_SHUFFLE = "shuffle";
 
-
 	/// <summary>
 	/// The filename of the Session file.
 	/// </summary>

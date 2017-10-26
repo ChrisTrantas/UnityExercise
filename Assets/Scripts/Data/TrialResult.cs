@@ -5,11 +5,11 @@ using System.Xml.Linq;
 
 public class TrialResult
 {
+    // Cases
 	const string ATTRIBUTE_SUCCESS = "success";
     const string ATTRIBUTE_FAIL = "fail";
 	const string ATTRIBUTE_RESPONSE_TIME = "responseTime";
 	const string ATTRIBUTE_ACCURACY = "accuracy";
-
 
 	/// <summary>
 	/// A reference to the Trial data.
